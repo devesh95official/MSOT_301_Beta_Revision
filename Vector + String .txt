@@ -1,0 +1,1443 @@
+============================================================
+              C++ STL BASICS
+              VECTOR + STRING
+============================================================
+
+
+============================================================
+1. VECTOR
+============================================================
+
+vector is a dynamic array.
+
+Normal array:
+
+int a[5];
+
+Size is fixed.
+
+Vector:
+
+vector<int> v;
+
+Size can grow or shrink.
+
+
+------------------------------------------------------------
+2. INCLUDING VECTOR
+------------------------------------------------------------
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+------------------------------------------------------------
+3. CREATING A VECTOR
+------------------------------------------------------------
+
+vector<int> v;
+
+Empty vector.
+
+
+vector<int> v(5);
+
+Vector of size 5.
+
+Initial values:
+
+0 0 0 0 0
+
+
+vector<int> v(5, 10);
+
+Vector of size 5.
+
+Initial values:
+
+10 10 10 10 10
+
+
+vector<int> v = {10, 20, 30, 40};
+
+------------------------------------------------------------
+4. ACCESSING ELEMENTS
+------------------------------------------------------------
+
+vector<int> v = {10, 20, 30, 40};
+
+v[0]       -> 10
+v[1]       -> 20
+v[2]       -> 30
+v[3]       -> 40
+
+
+Index always starts from 0.
+
+
+v[0] = 100;
+
+Now:
+
+100 20 30 40
+
+
+------------------------------------------------------------
+5. SIZE
+------------------------------------------------------------
+
+v.size()   // O(1)
+
+Returns number of elements.
+
+
+Example:
+
+vector<int> v = {10, 20, 30};
+
+cout << v.size();
+
+Output:
+
+3
+
+
+Important:
+
+v.size() is NOT the last index.
+
+For size = 3:
+
+indexes are:
+
+0 1 2
+
+
+------------------------------------------------------------
+6. ADDING ELEMENTS
+------------------------------------------------------------
+
+push_back()   // O(1) but if u insert begin then O(n)
+
+Adds an element at the end.
+
+
+vector<int> v;
+
+v.push_back(10);
+v.push_back(20);
+v.push_back(30);
+
+
+Vector:
+
+10 20 30
+
+
+------------------------------------------------------------
+7. REMOVING LAST ELEMENT
+------------------------------------------------------------
+
+pop_back()   // O(1)  but if b/w or start then O(n)
+
+
+vector<int> v = {10, 20, 30};
+
+v.pop_back();
+
+
+Now:
+
+10 20
+
+
+pop_back() removes only the LAST element.
+
+
+------------------------------------------------------------
+8. FIRST AND LAST ELEMENT
+------------------------------------------------------------
+
+No need , only v[0] and v[n - 1] are enough
+
+------------------------------------------------------------
+9. CHECKING EMPTY VECTOR
+------------------------------------------------------------
+
+No need, only if(v.size() == 0) will tell us this.
+
+------------------------------------------------------------
+10. TRAVERSING VECTOR
+------------------------------------------------------------
+
+Method 1:
+
+for (int i = 0; i < v.size(); i++){
+    cout << v[i] << ' ';
+}
+
+
+Method 2:
+
+for (int x : v){
+    cout << x << ' ';
+}
+
+
+Method 3:
+
+for (auto x : v){
+    cout << x << ' ';
+}
+
+
+------------------------------------------------------------
+11. TAKING INPUT IN VECTOR
+------------------------------------------------------------
+
+int n;
+cin >> n;
+
+vector<int> v(n);
+
+for (int i = 0; i < n; i++){
+    cin >> v[i];
+}
+
+
+Example input:
+
+5
+10 20 30 40 50
+
+
+Vector:
+
+10 20 30 40 50
+
+
+------------------------------------------------------------
+12. VECTOR WITH PUSH_BACK INPUT
+------------------------------------------------------------
+
+int n;
+cin >> n;
+
+vector<int> v;
+
+for (int i = 0; i < n; i++){
+    int x;
+    cin >> x;
+
+    v.push_back(x);
+}
+
+
+------------------------------------------------------------
+13. MODIFYING ELEMENTS
+------------------------------------------------------------
+
+vector<int> v = {10, 20, 30};
+
+v[1] = 100;
+
+
+Now:
+
+10 100 30
+
+
+------------------------------------------------------------
+14. CLEAR VECTOR
+------------------------------------------------------------
+
+v.clear();
+
+
+Removes all elements.
+
+
+vector<int> v = {10, 20, 30};
+
+v.clear();
+
+v.size() -> 0
+
+
+------------------------------------------------------------
+15. RESIZE
+------------------------------------------------------------
+
+Not needed now, used in Advanced concepts.
+
+------------------------------------------------------------
+16. SORTING VECTOR
+------------------------------------------------------------
+
+sort(v.begin(), v.end());
+
+
+Example:
+
+vector<int> v = {5, 2, 8, 1, 3};
+
+sort(v.begin(), v.end());
+
+
+Result:
+
+1 2 3 5 8
+
+
+Descending:
+
+sort(v.rbegin(), v.rend());
+
+
+Result:
+
+8 5 3 2 1
+
+
+------------------------------------------------------------
+17. REVERSE VECTOR
+------------------------------------------------------------
+
+reverse(v.begin(), v.end());
+
+
+Example:
+
+1 2 3 4 5
+
+becomes:
+
+5 4 3 2 1
+
+
+------------------------------------------------------------
+18. FINDING ELEMENT
+------------------------------------------------------------
+
+bool nhi_mila = true;
+for (int i = 0; i < n; i++) {
+    if(v[i] == Target){
+        cout << "Koi mil Gaya :)";
+        nhi_mila = false;
+        break;
+    }
+}
+if(nhi_mila)cout << "Nhi mila :(";
+
+
+------------------------------------------------------------
+19. COUNTING ELEMENT
+------------------------------------------------------------
+
+int cnt = 0;
+for (int i = 0; i < n; i++) {
+    if(v[i] == Target){
+        cnt++;
+    }
+}
+cout << cnt << endl;
+
+
+------------------------------------------------------------
+20. MINIMUM AND MAXIMUM
+------------------------------------------------------------
+
+*min_element(v.begin(), v.end()) // O(n)
+
+*max_element(v.begin(), v.end()) // O(n)
+
+
+Example:
+
+vector<int> v = {5, 2, 8, 1};
+
+cout << *min_element(v.begin(), v.end());
+
+Output:
+
+1
+
+
+cout << *max_element(v.begin(), v.end());
+
+Output:
+
+8
+
+
+WHY * ?
+
+min_element() returns an iterator.
+
+* is used to get the actual value.
+
+
+------------------------------------------------------------
+21. SUM OF VECTOR
+------------------------------------------------------------
+
+int sum = 0;
+
+for (int x : v){
+    sum += x;
+}
+
+
+For long long:
+
+long long sum = 0;
+
+for (long long x : v){
+    sum += x;
+}
+
+
+------------------------------------------------------------
+22. COPY VECTOR
+------------------------------------------------------------
+
+vector<int> a = {1, 2, 3};
+
+vector<int> b = a;
+
+
+Now both contain:
+
+1 2 3
+
+
+------------------------------------------------------------
+23. SWAP VECTORS
+------------------------------------------------------------
+
+swap(a, b);
+
+
+------------------------------------------------------------
+24. 2D VECTOR
+------------------------------------------------------------
+
+vector<vector<int>> v;
+
+
+Create 3 x 4 matrix:
+
+vector<vector<int>> v(3, vector<int>(4));
+
+
+Access:
+
+v[0][0]
+v[1][2]
+v[2][3]
+
+
+Input:
+
+for (int i = 0; i < 3; i++){
+    for (int j = 0; j < 4; j++){
+        cin >> v[i][j];
+    }
+}
+
+
+Output:
+
+for (int i = 0; i < 3; i++){
+    for (int j = 0; j < 4; j++){
+        cout << v[i][j] << ' ';
+    }
+    cout << endl;
+}
+
+
+============================================================
+IMPORTANT VECTOR FUNCTIONS
+============================================================
+
+v.size()  // O(1)
+v.push_back(x)  // O(1)
+v.pop_back()  // O(1)
+v.clear()   // O(n)
+v[i]    // O(1)
+
+sort(v.begin(), v.end())  // O(n*log(n))
+reverse(v.begin(), v.end()) // O(n)
+min_element(v.begin(), v.end()) // O(n)
+max_element(v.begin(), v.end())  // O(n)
+
+
+============================================================
+VECTOR ITERATORS
+============================================================
+
+begin()
+
+Points to first element.
+
+
+end()
+
+Points just AFTER the last element.
+
+
+Example:
+
+vector<int> v = {10, 20, 30};
+
+v.begin() -> 10
+v.end()   -> after 30
+
+
+This is why we write:
+
+sort(v.begin(), v.end());
+
+
+------------------------------------------------------------
+ITERATOR EXAMPLE
+------------------------------------------------------------
+
+vector<int> v = {10, 20, 30};
+
+auto it = v.begin();
+
+cout << *it;
+
+Output:
+
+10
+
+
+++it;
+
+cout << *it;
+
+Output:
+
+20
+
+
+============================================================
+VECTOR OF PAIRS
+============================================================
+
+vector<pair<int, int>> v;
+
+
+Add:
+
+v.push_back({10, 20});
+v.push_back({30, 40});
+
+
+Access:
+
+v[0].first
+v[0].second
+
+
+Output:
+
+10 20
+30 40
+
+
+============================================================
+VECTOR OF STRINGS
+============================================================
+
+vector<string> v;
+
+v.push_back("hello");
+v.push_back("world");
+
+
+Access:
+
+v[0]
+v[1]
+
+
+Input:
+
+int n;
+cin >> n;
+
+vector<string> v(n);
+
+for (int i = 0; i < n; i++){
+    cin >> v[i];
+}
+
+
+============================================================
+              STRING
+============================================================
+
+string is used to store text.
+
+Example:
+
+string s = "hello";
+
+
+------------------------------------------------------------
+1. CREATING STRING
+------------------------------------------------------------
+
+string s;
+
+string s = "hello";
+
+
+------------------------------------------------------------
+2. INPUT
+------------------------------------------------------------
+
+string s;
+
+cin >> s;
+
+
+IMPORTANT:
+
+cin >> s
+
+reads only ONE WORD.
+
+Input:
+
+hello world
+
+Only:
+
+hello
+
+is stored.
+
+
+------------------------------------------------------------
+3. GETTING FULL LINE
+------------------------------------------------------------
+
+string s;
+
+getline(cin, s);
+
+
+Input:
+
+hello world
+
+Entire line is stored.
+
+Example:
+
+int n;
+cin >> n;
+string s;
+getline(cin, s);
+
+
+------------------------------------------------------------
+4. ACCESSING CHARACTERS
+------------------------------------------------------------
+
+string s = "hello";
+
+s[0] -> 'h'
+s[1] -> 'e'
+s[2] -> 'l'
+s[3] -> 'l'
+s[4] -> 'o'
+
+
+------------------------------------------------------------
+5. MODIFY CHARACTER
+------------------------------------------------------------
+
+string s = "hello";
+
+s[0] = 'H';
+
+
+Now:
+
+Hello
+
+
+------------------------------------------------------------
+6. STRING SIZE
+------------------------------------------------------------
+
+s.size() 
+
+or:
+
+s.length()
+
+
+Both give the number of characters.
+
+
+string s = "hello";
+
+s.size() -> 5
+s.length() -> 5
+
+
+------------------------------------------------------------
+7. STRING EMPTY
+------------------------------------------------------------
+
+if(s.size() == 0)true;
+
+------------------------------------------------------------
+8. ADD CHARACTER
+------------------------------------------------------------
+
+s.push_back('a');
+
+
+Example:
+
+string s = "hell";
+
+s.push_back('o');
+
+
+Now:
+
+hello
+
+
+------------------------------------------------------------
+9. REMOVE LAST CHARACTER
+------------------------------------------------------------
+
+s.pop_back();
+
+
+Example:
+
+string s = "hello";
+
+s.pop_back();
+
+
+Now:
+
+hell
+
+
+------------------------------------------------------------
+10. FIRST AND LAST CHARACTER
+------------------------------------------------------------
+
+s[0], s[n - 1]
+
+------------------------------------------------------------
+11. TRAVERSE STRING
+------------------------------------------------------------
+
+string s = "hello";
+
+
+Using index:
+
+for (int i = 0; i < s.size(); i++){
+    cout << s[i];
+}
+
+
+Using range loop:
+
+for (char c : s){
+    cout << c;
+}
+
+
+============================================================
+CHARACTER BASICS
+============================================================
+
+char c = 'a';
+
+
+A character uses SINGLE quotes:
+
+'a'
+'b'
+'Z'
+'5'
+
+
+A string uses DOUBLE quotes:
+
+"hello"
+"abc"
+"123"
+
+
+------------------------------------------------------------
+ASCII
+------------------------------------------------------------
+
+'a' = 97
+'b' = 98
+'c' = 99
+
+'A' = 65
+'B' = 66
+
+'0' = 48
+'1' = 49
+
+
+Characters can be compared:
+
+'a' < 'b'
+'A' < 'B'
+
+
+------------------------------------------------------------
+CHARACTER CHECKS
+------------------------------------------------------------
+
+isdigit(c)
+
+Checks whether c is a digit.
+
+
+isalpha(c)
+
+Checks whether c is alphabet.
+
+
+islower(c)
+
+Checks lowercase.
+
+
+isupper(c)
+
+Checks uppercase.
+
+
+Example:
+
+if (isdigit(c)){
+    cout << "Digit";
+}
+
+
+------------------------------------------------------------
+CHARACTER CONVERSION
+------------------------------------------------------------
+
+tolower(c)
+
+Converts to lowercase.
+
+
+toupper(c)
+
+Converts to uppercase.
+
+
+Example:
+
+char c = 'A';
+
+c = tolower(c);
+
+
+Now:
+
+'a'
+
+
+============================================================
+STRING CONCATENATION
+============================================================
+
+string a = "hello";
+string b = "world";
+
+string c = a + b;
+
+
+Result:
+
+helloworld
+
+
+With space:
+
+string c = a + " " + b;
+
+
+Result:
+
+hello world
+
+
+------------------------------------------------------------
+APPEND
+------------------------------------------------------------
+
+s += "abc";
+
+
+Example:
+
+string s = "hello";
+
+s += " world";
+
+
+Result:
+
+hello world
+
+
+Also:
+
+s.append(" world");
+
+
+============================================================
+STRING COMPARISON
+============================================================
+
+string a = "abc";
+string b = "abc";
+
+a == b
+
+
+true
+
+
+a != b
+
+
+true if different
+
+
+a < b
+a > b
+
+
+Strings are compared lexicographically.
+
+
+Example:
+
+"abc" < "abd"
+
+
+true
+
+
+============================================================
+REVERSE STRING
+============================================================
+
+reverse(s.begin(), s.end());
+
+
+Example:
+
+string s = "hello";
+
+reverse(s.begin(), s.end());
+
+
+Result:
+
+olleh
+
+
+============================================================
+SORT STRING
+============================================================
+
+sort(s.begin(), s.end());
+
+
+Example:
+
+string s = "dcba";
+
+sort(s.begin(), s.end());
+
+
+Result:
+
+abcd
+
+
+============================================================
+FIND IN STRING
+============================================================
+
+s.find("abc")
+
+
+Example:
+
+string s = "hello world";
+
+auto pos = s.find("world");
+
+
+If found:
+
+pos != string::npos
+
+
+If not found:
+
+pos == string::npos
+
+
+Example:
+
+if (s.find("world") != string::npos)
+{
+    cout << "Found";
+}
+
+
+------------------------------------------------------------
+FIND CHARACTER
+------------------------------------------------------------
+
+string s = "hello";
+
+if (s.find('e') != string::npos)
+{
+    cout << "Found";
+}
+
+
+============================================================
+SUBSTRING
+============================================================
+
+substr()
+
+
+Syntax:
+
+s.substr(start, length)
+
+
+Example:
+
+string s = "abcdef";
+
+cout << s.substr(1, 3);
+
+
+Output:
+
+bcd
+
+
+Indexes:
+
+a b c d e f
+0 1 2 3 4 5
+
+
+s.substr(2, 3)
+
+gives:
+
+cde
+
+
+------------------------------------------------------------
+SUBSTRING FROM INDEX
+------------------------------------------------------------
+
+s.substr(2)
+
+
+Means:
+
+take everything from index 2.
+
+
+Example:
+
+string s = "abcdef";
+
+s.substr(2)
+
+
+Result:
+
+cdef
+
+
+============================================================
+INSERT IN STRING
+============================================================
+
+s.insert(position, string)
+
+
+Example:
+
+string s = "hello";
+
+s.insert(5, " world");
+
+
+Result:
+
+hello world
+
+
+============================================================
+ERASE FROM STRING
+============================================================
+
+s.erase(position, length)
+
+
+Example:
+
+string s = "abcdef";
+
+s.erase(2, 2);
+
+
+Removes:
+
+c d
+
+
+Result:
+
+abef
+
+
+------------------------------------------------------------
+ERASE ONE CHARACTER
+------------------------------------------------------------
+
+s.erase(2, 1);
+
+
+============================================================
+REPLACE
+============================================================
+
+s.replace(position, length, string)
+
+
+Example:
+
+string s = "abcdef";
+
+s.replace(2, 2, "XYZ");
+
+
+Result:
+
+abXYZef
+
+
+============================================================
+STRING TO INTEGER
+============================================================
+
+stoi()
+
+
+Example:
+
+string s = "123";
+
+int x = stoi(s);
+
+
+x = 123
+
+
+For long long:
+
+stoll(s)
+
+
+Example:
+
+string s = "123456789";
+
+long long x = stoll(s);
+
+
+============================================================
+INTEGER TO STRING
+============================================================
+
+to_string()
+
+
+Example:
+
+int x = 123;
+
+string s = to_string(x);
+
+
+s becomes:
+
+"123"
+
+
+============================================================
+STRING STREAM
+============================================================
+
+stringstream can split a string into words.
+
+
+Example:
+
+string s = "hello world cpp";
+
+stringstream ss(s);
+
+string word;
+
+while (ss >> word)
+{
+    cout << word << '\n';
+}
+
+
+Output:
+
+hello
+world
+cpp
+
+
+============================================================
+COMMON STRING PROBLEMS
+============================================================
+
+1. Count characters
+2. Count vowels
+3. Count digits
+4. Reverse a string
+5. Check palindrome
+6. Convert lowercase to uppercase
+7. Convert uppercase to lowercase
+8. Count frequency of characters
+9. Find a substring
+10. Remove a character
+11. Remove spaces
+12. Compare two strings
+13. Check anagram
+14. Find first non-repeating character
+15. Find longest word
+16. Count words
+
+
+============================================================
+FREQUENCY OF CHARACTERS
+============================================================
+
+For lowercase English letters:
+
+int freq[26] = {0};
+
+for (char c : s)
+{
+    freq[c - 'a']++;
+}
+
+
+Example:
+
+s = "banana"
+
+
+freq['a' - 'a'] -> 3
+freq['b' - 'a'] -> 1
+freq['n' - 'a'] -> 2
+
+
+------------------------------------------------------------
+Using vector
+------------------------------------------------------------
+
+vector<int> freq(26, 0);
+
+for (char c : s)
+{
+    freq[c - 'a']++;
+}
+
+
+============================================================
+PALINDROME
+============================================================
+
+A palindrome reads the same from both sides.
+
+Examples:
+
+madam
+level
+racecar
+
+
+Simple method:
+
+string t = s;
+
+reverse(t.begin(), t.end());
+
+if (s == t)
+{
+    cout << "Palindrome";
+}
+
+
+============================================================
+VECTOR + STRING TOGETHER
+============================================================
+
+Example:
+
+int n;
+cin >> n;
+
+vector<string> v(n);
+
+for (int i = 0; i < n; i++)
+{
+    cin >> v[i];
+}
+
+for (string s : v)
+{
+    cout << s << '\n';
+}
+
+
+============================================================
+MOST IMPORTANT THINGS TO MEMORIZE
+============================================================
+
+VECTOR:
+
+vector<int> v;
+
+v.push_back(x);
+v.pop_back();
+
+v[i];
+
+v.size();
+v.empty();
+
+v.front();
+v.back();
+
+v.clear();
+v.resize(n);
+
+sort(v.begin(), v.end());
+reverse(v.begin(), v.end());
+
+find(v.begin(), v.end(), x);
+count(v.begin(), v.end(), x);
+
+*min_element(v.begin(), v.end());
+*max_element(v.begin(), v.end());
+
+
+STRING:
+
+string s;
+
+cin >> s;
+getline(cin, s);
+
+s[i];
+
+s.size();
+s.length();
+s.empty();
+
+s.front();
+s.back();
+
+s.push_back(c);
+s.pop_back();
+
+s += "abc";
+
+sort(s.begin(), s.end());
+reverse(s.begin(), s.end());
+
+s.find("abc");
+
+s.substr(pos, len);
+
+s.erase(pos, len);
+
+s.insert(pos, "abc");
+
+s.replace(pos, len, "abc");
+
+stoi(s);
+stoll(s);
+
+to_string(x);
+
+tolower(c);
+toupper(c);
+
+
+============================================================
+QUICK REMINDER
+============================================================
+
+vector<int> v;
+
+v.push_back(10);       // add
+v.pop_back();          // remove last
+v[0];                  // access
+v.size();              // size
+v.clear();             // remove everything
+
+
+string s = "hello";
+
+s.push_back('x');      // add character
+s.pop_back();          // remove last character
+s[0];                  // access
+s.size();              // size
+s += "abc";            // append
+reverse(s.begin(),s.end());
+sort(s.begin(),s.end());
+
+
+============================================================
+END
+============================================================
